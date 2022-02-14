@@ -1,3 +1,5 @@
+(ns exercises.chapter3)
+
 ;; exercise 1
 
 (def sometimes-nothing "a real cool hand.")
@@ -88,6 +90,8 @@
 
 (expand-body-parts asym-body-parts 3)
 (expand-body-parts asym-body-parts 5)
+
+(into {:a 1 :b 2} {:c 3 :d 4})
 
 ;; sample output
 
