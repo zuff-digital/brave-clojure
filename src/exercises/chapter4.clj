@@ -71,21 +71,28 @@
 
 ;; exercise 3 [wip, unsolved]
 
-(def validate-keys {:name some?
-                    :glitter-index some?})
+(def validate-keys {:name string?
+                    :glitter-index int?})
+
 (defn validate
-  "Ensure that a record has a :glitter-index key and :name key prior to appending to a list"
   [criteria-map record]
-  (reduce (fn [acc [key val]]
-            (if ((get criteria-map key) val)
-              (append acc record)
-              acc))
-          glittery-list
-          record))
+  (every? true? (map (fn [[key f]]
+                       (f (key record)))
+                     criteria-map)))
 
+(def zuff {:name "zuff" :glitter-index 0})
 
-(def validated-list (validate validate-keys {:name "zuff" :glitter-index nil}))
-validated-list
+(validate validate-keys zuff)
+;; => true
+
+(defn validate-append
+  [list record]
+  (if (validate validate-keys record)
+    (append list record)
+    list))
+
+(validate-append glittery-list zuff)
+;; => ("zuff" "Carlisle Cullen" "Jacob Black" "Edward Cullen")
 
 ;; exercise 4
 
