@@ -1,4 +1,4 @@
-(ns exercises.chapter7)
+q (ns exercises.chapter7)
 
 ;; exercise 1
 
